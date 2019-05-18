@@ -2,6 +2,7 @@ package org.brush.bowling;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,13 +16,6 @@ public class GameTest {
     public void setUp()
     {
         game=new Game();
-    }
-    @Test
-    public void testOneThrow()
-    {
-        game.add(5);
-        assertEquals("get score",5,game.score());
-        assertEquals("current frame",1,game.getCurrentFrame());
     }
 
     @Test
@@ -64,6 +58,45 @@ public class GameTest {
         game.add(3);
         game.add(2);
         assertEquals("frame 1",13,game.scoreForFrame(1));
-        assertEquals("score",18,game.scoreForFrame(2));
+        assertEquals("frame 2",18,game.scoreForFrame(2));
+        assertEquals("score",18,game.score());
+    }
+    @Test
+    public void test()
+    {
+        game.add(10);
+        game.add(3);
+        game.add(6);
+        assertEquals("score frame 1",19,game.scoreForFrame(1));
+        assertEquals("score ",28,game.score());
+        assertEquals("current frame",3,game.getCurrentFrame());
+
+    }
+
+    @Test
+    public void testPerfactGame()
+    {
+        for(int i=0;i<12;i++)
+        {
+            game.add(10);
+        }
+        assertEquals("score",300,game.score());
+        assertEquals("score frame 1",30,game.scoreForFrame(1));
+        assertEquals("score frame 2",60,game.scoreForFrame(2));
+        assertEquals("current frame",11,game.getCurrentFrame());
+    }
+
+    @Test
+    public void testEndOfArray()
+    {
+        for(int i=0;i<9;i++)
+        {
+            game.add(0);
+            game.add(0);
+        }
+        game.add(2);
+        game.add(8);
+        game.add(10);
+        assertEquals("endOfArray",20, game.score());
     }
 }
